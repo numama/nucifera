@@ -25,8 +25,10 @@ it('fetch UserData', async () => {
   return store.dispatch(matchingAction.fetcheUserData()).then(() => {
       const actions = store.getActions();
       console.log(actions[0]);
-      expect(actions[0].type).toEqual(matchingActionType.LOGIN.COMPLETE);
-      expect(actions[0].userID).not.toBeNull();
+      console.log(actions[1]);
+      expect(actions[0].type).toEqual(matchingActionType.FETCH_USERDATA.START);
+      expect(actions[1].type).toEqual(matchingActionType.FETCH_USERDATA.COMPLETE);
+      expect(actions[1].userID).not.toBeNull();
   })
 });
 

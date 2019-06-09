@@ -22,17 +22,18 @@ export const login = () => {
 export const fetcheUserData = () =>{
   return (dispatch)=>{
     return new Promise((resolve, reject) => {
+      dispatch({type: action.FETCH_USERDATA.START});
       setTimeout(()=>{
         reject("Timeout");
-        dispatch({type: action.LOGIN.ERROR});
+        dispatch({type: action.FETCH_USERDATA.ERROR});
       },10000);
       firebase.firebaseAuth.onAuthStateChanged(function(user) {
         clearTimeout();
           if (user) {
-            dispatch({type: action.LOGIN.COMPLETE,userID: user.uid});
+            dispatch({type: action.FETCH_USERDATA.COMPLETE,userID: user.uid});
             resolve(user);
           } else {
-            dispatch({type: action.LOGIN.ERROR});
+            dispatch({type: action.FETCH_USERDATA.ERROR});
             reject();
           }
       });
