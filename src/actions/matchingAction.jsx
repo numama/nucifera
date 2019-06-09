@@ -6,6 +6,7 @@ import {firebaseDb,firebaseAuth} from '../firebase/'
 import firebase from 'firebase';
 import 'firebase/firestore';
 
+//ログイン処理
 export const login = () => {
   return(dispatch) => {
     dispatch({type: action.LOGIN.START});
@@ -20,7 +21,7 @@ export const login = () => {
   }
 }
 
-
+//ユーザーデータ取得（ログイン処理後に呼び出す）
 export const fetcheUserData = () =>{
   return (dispatch)=>{
     return new Promise((resolve, reject) => {
@@ -46,6 +47,7 @@ export const fetcheUserData = () =>{
   }
 }
 
+//ランダムな利用可能ルームを1件取得
 export const matchRandomAvailableRoom = () => {
   return (dispatch)=>{
     const timeout = new Date();
@@ -71,6 +73,7 @@ export const matchRandomAvailableRoom = () => {
   }
 }
 
+//新規ルームを作成
 export const createNewRoom = () =>{
   return (dispatch)=>{
     let newRoom = {
