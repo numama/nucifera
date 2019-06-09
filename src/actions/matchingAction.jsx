@@ -6,13 +6,6 @@ import 'firebase/firestore';
 
 export const login = () => {
   return(dispatch) => {
-    /*firebase.firebaseAuth.onAuthStateChanged(function(user) {
-      if (user) {
-        dispatch({type: action.LOGIN.COMPLETE,userID: user.uid})
-      } else {
-        dispatch({type: action.LOGIN.ERROR})
-      }
-    });*/
     return firebase.firebaseAuth.signInAnonymously().then(function(user){
       dispatch({type: action.LOGIN.COMPLETE,userID: user.uid});
       })
@@ -26,7 +19,7 @@ export const login = () => {
 }
 
 
-export const loginCheck = () =>{
+export const fetcheUserData = () =>{
   return (dispatch)=>{
     return new Promise((resolve, reject) => {
       setTimeout(()=>{
@@ -46,16 +39,4 @@ export const loginCheck = () =>{
     });
 
   }
-}
-
-() => {
-  var provider = twitterProvider;
-  firebase.firebaseAuth.signInWithRedirect(provider);
-  firebase.auth().signInAnonymously().catch(function(error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // ...
-  });
-  return {type: action.LOGIN}
 }

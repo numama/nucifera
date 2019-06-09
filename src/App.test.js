@@ -18,7 +18,7 @@ it('test Login', async () => {
   })
 });
 
-it('test Login Check', async () => {
+it('fetch UserData', async () => {
   const store = mockStore({})
   return store.dispatch(matchingAction.loginCheck()).then(() => {
       const actions = store.getActions();
