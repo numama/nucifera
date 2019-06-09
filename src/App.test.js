@@ -9,18 +9,20 @@ import thunk from 'redux-thunk';
 const middlewares = [thunk]
 const mockStore = configureStore(middlewares)
 
-it('test Login', async () => {
+it('test login', async () => {
   const store = mockStore({})
   return store.dispatch(matchingAction.login()).then(() => {
       const actions = store.getActions();
       console.log(actions[0]);
-      expect(actions[0]).toEqual({type:matchingActionType.LOGIN.COMPLETE})
+      console.log(actions[1]);
+      expect(actions[0]).toEqual({type:matchingActionType.LOGIN.START});
+      expect(actions[1]).toEqual({type:matchingActionType.LOGIN.COMPLETE});
   })
 });
 
 it('fetch UserData', async () => {
   const store = mockStore({})
-  return store.dispatch(matchingAction.loginCheck()).then(() => {
+  return store.dispatch(matchingAction.fetcheUserData()).then(() => {
       const actions = store.getActions();
       console.log(actions[0]);
       expect(actions[0].type).toEqual(matchingActionType.LOGIN.COMPLETE);

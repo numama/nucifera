@@ -6,13 +6,13 @@ import 'firebase/firestore';
 
 export const login = () => {
   return(dispatch) => {
-    return firebase.firebaseAuth.signInAnonymously().then(function(user){
-      dispatch({type: action.LOGIN.COMPLETE,userID: user.uid});
+    dispatch({type: action.LOGIN.START});
+    return firebase.firebaseAuth.signInAnonymously().then(function(){
+      dispatch({type: action.LOGIN.COMPLETE});
       })
       .catch(function(error) {
         var errorCode = error.code;
         var errorMessage = error.message;
-        console.log("failed to sign in");
         dispatch({type: action.LOGIN.ERROR,msg:error.message});
       });
   }
