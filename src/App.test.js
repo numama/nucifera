@@ -32,6 +32,42 @@ it('fetch UserData', async () => {
   })
 });
 
+it('match random available room not found',async () =>{
+  const store = mockStore({})
+  return store.dispatch(matchingAction.matchRandomAvailableRoom()).then(() => {
+      const actions = store.getActions();
+      console.log(actions[0]);
+      console.log(actions[1]);
+      expect(actions[0].type).toEqual(matchingActionType.MATCH_ROOM.START);
+      expect(actions[1].type).toEqual(matchingActionType.MATCH_ROOM.NOT_FOUND);
+  })
+});
+
+it('create room and rematch',async ()=>{
+  const store = mockStore({})
+  return store.dispatch(matchingAction.createNewRoom()).then(() => {
+      const actions = store.getActions();
+      console.log(actions[0]);
+      console.log(actions[1]);
+      expect(actions[0].type).toEqual(matchingActionType.CREATE_ROOM.START);
+      expect(actions[1].type).toEqual(matchingActionType.CREATE_ROOM.COMPLETE);
+      expect(actions[1].roomId).not.toBeNull();
+      expect(actions[1].roomData).not.toBeNull();
+  })
+});
+
+it('rematch random available room found',async () =>{
+  const store = mockStore({})
+  return store.dispatch(matchingAction.matchRandomAvailableRoom()).then(() => {
+      const actions = store.getActions();
+      console.log(actions[0]);
+      console.log(actions[1]);
+      expect(actions[0].type).toEqual(matchingActionType.MATCH_ROOM.START);
+      expect(actions[1].type).toEqual(matchingActionType.MATCH_ROOM.FOUND);
+      expect(actions[1].roomId).not.toBeNull();
+      expect(actions[1].roomData).not.toBeNull();
+  })
+});
 
 
 it('renders without crashing', () => {
